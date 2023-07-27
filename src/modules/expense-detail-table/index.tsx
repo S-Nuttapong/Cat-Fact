@@ -1,2 +1,2 @@
-export { ExpenseDetailTable } from "./ExpensesDetailTable"
-export { useExpenseRowSelector } from "./useExpenseRowSelector"
+export { ExpenseDetailTable } from "./ExpensesDetailTable";
+export { useExpenseRowSelector } from "./useExpenseRowSelector";

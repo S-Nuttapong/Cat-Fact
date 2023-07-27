@@ -52,7 +52,7 @@ export const ExpenseDetailTable = (props: IExpenseDetailTable) => {
 
   if (isLoading) return <Spinner color="content.primary" />;
 
-  if (isError) return "An error has occurred.";
+  if (isError) return <Text color="content.guide">An error has occurred.</Text>;
 
   if (isEmpty(expenses))
     return <Text color="content.guide">No expense details</Text>;
