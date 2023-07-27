@@ -4,10 +4,8 @@ import { useQuery } from "react-query";
 import { AddExpense } from "./AddExpenses";
 import { expenseServices } from "./Apis";
 import { DeleteExpense } from "./DeleteExpense";
-import {
-  ExpenseDetailTable,
-  useExpenseRowSelector,
-} from "./ExpensesDetailTable";
+import { ExpenseDetailTable } from "./ExpensesDetailTable";
+import { useExpenseRowSelector } from "./useExpenseRowSelector";
 
 interface IAppLayout {
   children: ReactNode;
