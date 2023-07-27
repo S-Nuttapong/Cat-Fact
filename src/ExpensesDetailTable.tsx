@@ -90,7 +90,7 @@ export const ExpensesDetailTable = () => {
       ) : (
         <Table>
           <Thead>
-            <Tr>
+            <Tr textTransform="capitalize">
               <Th>
                 <Checkbox
                   border="1px solid grey"
@@ -98,9 +98,9 @@ export const ExpensesDetailTable = () => {
                   onChange={row.selectAll}
                 />
               </Th>
-              <Th>Item</Th>
-              <Th>Category</Th>
-              <Th>Amount</Th>
+              <Th textTransform="inherit">Item</Th>
+              <Th textTransform="inherit">Category</Th>
+              <Th textTransform="inherit">Amount</Th>
             </Tr>
           </Thead>
           <Tbody>

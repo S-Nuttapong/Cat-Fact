@@ -85,7 +85,7 @@ export const ExpenseForm = ({ onSubmit }: IExpenseForm) => {
             type="text"
             borderColor="border.form"
             borderWidth={2}
-            placeholder="Item Name"
+            placeholder="Item name"
           />
         </FormField>
         <FormField label="Category" error={errors.category}>
