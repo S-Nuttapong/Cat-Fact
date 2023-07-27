@@ -12,7 +12,7 @@ $ pnpm run dev              # launch stand
 ```
 $ pnpm playwright           # E2E tests
 $ pnpm vitest               # unit tests
-$ pnpm lint                    # linters tests
+$ pnpm lint                 # linters tests
 ```
 
 ### Chakra Theme CodeGen
