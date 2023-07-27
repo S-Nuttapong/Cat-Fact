@@ -1,11 +1,13 @@
 import { Box, Center, Flex, HStack, Stack } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { useQuery } from "react-query";
-import { AddExpense } from "./AddExpenses";
-import { expenseServices } from "./Apis";
-import { DeleteExpense } from "./DeleteExpense";
-import { ExpenseDetailTable } from "./ExpensesDetailTable";
-import { useExpenseRowSelector } from "./useExpenseRowSelector";
+import { DeleteExpense } from "./modules/DeleteExpense";
+import { AddExpense } from "./modules/add-expenses";
+import {
+  ExpenseDetailTable,
+  useExpenseRowSelector,
+} from "./modules/expense-detail-table";
+import { expenseServices } from "./shared/Apis";
 
 interface IAppLayout {
   children: ReactNode;

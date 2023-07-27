@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { expenseServices, fetchCatFact } from "./Apis";
+import { expenseServices, fetchCatFact } from "../../shared/Apis";
 import { ExpenseForm } from "./ExpenseForm";
 
 export const AddExpense = () => {

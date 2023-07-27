@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useMutation, useQueryClient } from "react-query";
 import { isEmpty } from "remeda";
-import { Expense, expenseServices } from "./Apis";
+import { Expense, expenseServices } from "../shared/Apis";
 
 export interface IDeleteExpense {
   selectedExpenseIds: Expense["id"][];

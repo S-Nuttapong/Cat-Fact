@@ -1,7 +1,7 @@
 import { ChangeEvent, useMemo, useState } from "react";
 import { isEmpty } from "remeda";
-import { Expense } from "./Apis";
-import { IDeleteExpense } from "./DeleteExpense";
+import { Expense } from "../../shared/Apis";
+import { IDeleteExpense } from "../DeleteExpense";
 
 export const useExpenseRowSelector = (expenses: Expense[]) => {
   const [selectedExpenseIds, setSelectedExpenseIds] = useState(

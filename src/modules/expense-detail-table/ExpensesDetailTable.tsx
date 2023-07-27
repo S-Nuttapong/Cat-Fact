@@ -12,9 +12,9 @@ import {
   Thead,
 } from "@chakra-ui/react";
 import { isEmpty } from "remeda";
-import { Expense } from "./Apis";
+import { Expense } from "../../shared/Apis";
+import { withDefaultStyles } from "../../shared/withDefaultStyles";
 import type { useExpenseRowSelector } from "./useExpenseRowSelector";
-import { withDefaultStyles } from "./withDefaultStyles";
 
 interface IExpenseDetailTable {
   isLoading?: boolean;
