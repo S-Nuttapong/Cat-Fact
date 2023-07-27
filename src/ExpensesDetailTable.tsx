@@ -1,7 +1,6 @@
 import {
   Checkbox,
-  HStack,
-  Stack,
+  Spinner,
   Table,
   Tbody,
   Td,
@@ -11,13 +10,11 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { ChangeEvent, useMemo, useState } from "react";
-import { useQuery } from "react-query";
 import { isEmpty } from "remeda";
-import { AddExpense } from "./AddExpenses";
-import { Expense, expenseServices } from "./Apis";
-import { DeleteExpense, IDeleteExpense } from "./DeleteExpense";
+import { Expense } from "./Apis";
+import { IDeleteExpense } from "./DeleteExpense";
 
-const useExpenseRowSelector = (expenses: Expense[]) => {
+export const useExpenseRowSelector = (expenses: Expense[]) => {
   const [selectedExpenseIds, setSelectedExpenseIds] = useState(
     [] as IDeleteExpense["selectedExpenseIds"]
   );
@@ -61,66 +58,55 @@ const useExpenseRowSelector = (expenses: Expense[]) => {
     isSelected,
   };
 };
+interface IExpenseDetailTable {
+  isLoading?: boolean;
+  isError?: boolean;
+  rowSelector: ReturnType<typeof useExpenseRowSelector>;
+  expenses: Expense[];
+}
 
-export const ExpensesDetailTable = () => {
-  const { data, isLoading, isError } = useQuery(
-    "expenses",
-    expenseServices.getExpenses
-  );
-  const expenses = data ?? [];
+export const ExpenseDetailTable = (props: IExpenseDetailTable) => {
+  const { isLoading, isError, rowSelector: row, expenses } = props;
 
-  const row = useExpenseRowSelector(expenses);
-
-  if (isLoading) return "Loading...";
+  if (isLoading) return <Spinner color="content.primary" />;
 
   if (isError) return "An error has occurred.";
 
-  return (
-    <Stack spacing={10}>
-      <HStack spacing={5}>
-        <AddExpense />
-        <DeleteExpense
-          onSuccess={row.reset}
-          selectedExpenseIds={row.selectedExpenseIds}
-        />
-      </HStack>
+  if (isEmpty(expenses))
+    return <Text color="content.guide">No expense details</Text>;
 
-      {isEmpty(expenses) ? (
-        <Text>No expense details</Text>
-      ) : (
-        <Table>
-          <Thead>
-            <Tr textTransform="capitalize">
-              <Th>
-                <Checkbox
-                  border="1px solid grey"
-                  isChecked={row.isAllSelected}
-                  onChange={row.selectAll}
-                />
-              </Th>
-              <Th textTransform="inherit">Item</Th>
-              <Th textTransform="inherit">Category</Th>
-              <Th textTransform="inherit">Amount</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {expenses.map((expense) => (
-              <Tr key={expense.id}>
-                <Td>
-                  <Checkbox
-                    isChecked={row.isSelected(expense.id)}
-                    border="1px solid grey"
-                    onChange={row.select(expense.id)}
-                  />
-                </Td>
-                <Td>{expense.item}</Td>
-                <Td>{expense.category}</Td>
-                <Td>{expense.amount.toFixed(2)}$</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      )}
-    </Stack>
+  return (
+    <Table>
+      <Thead>
+        <Tr textTransform="capitalize">
+          <Th>
+            <Checkbox
+              border="1px solid grey"
+              isChecked={row.isAllSelected}
+              onChange={row.selectAll}
+            />
+          </Th>
+          <Th textTransform="inherit">Item</Th>
+          <Th textTransform="inherit">Category</Th>
+          <Th textTransform="inherit">Amount</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        {expenses.map((expense) => (
+          <Tr key={expense.id}>
+            <Td>
+              <Checkbox
+                isChecked={row.isSelected(expense.id)}
+                border="1px solid grey"
+                onChange={row.select(expense.id)}
+              />
+            </Td>
+            <Td>{expense.item}</Td>
+            <Td>{expense.category}</Td>
+            <Td>{expense.amount.toFixed(2)}$</Td>
+          </Tr>
+        ))}
+      </Tbody>
+    </Table>
   );
 };
