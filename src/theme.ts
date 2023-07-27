@@ -40,6 +40,7 @@ const buttonTheme = defineStyleConfig({
         },
       },
       _focus: {
+        opacity: 1,
         boxShadow: 'outline',
       },
       _disabled: {
@@ -78,11 +79,13 @@ export const theme = extendTheme(
         primary: primary[900],
       },
       border: {
+        form: neutral[100],
         primary: neutral[50],
       },
       content: {
-        primary: neutral[50],
-        form: neutral[300],
+        primary: primary[600],
+        form: neutral[200],
+        guide: neutral[300],
       },
       button: {
         primary: primary[600],

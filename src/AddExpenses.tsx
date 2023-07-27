@@ -1,5 +1,6 @@
 import {
   Button,
+  Center,
   Flex,
   Modal,
   ModalBody,
@@ -39,7 +40,7 @@ export const AddExpense = () => {
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Add Expenses</ModalHeader>
-            <ModalCloseButton />
+            <ModalCloseButton size="sm" border="transparent" />
             <ModalBody pb={5}>
               <SimpleGrid
                 columns={{ sm: 1, md: 2 }}
@@ -55,12 +56,25 @@ export const AddExpense = () => {
                   flexDir="column"
                   justifyContent="start"
                   alignItems="start"
+                  fontStyle="italic"
+                  color="content.primary"
                 >
-                  <Text m={0}>Random cat fact:</Text>
+                  <Text
+                    m={0}
+                    color="inherit"
+                    fontWeight="bold"
+                    fontSize="inherit"
+                  >
+                    Random cat fact:
+                  </Text>
                   {catFact.isFetching ? (
-                    <Spinner />
+                    <Center w="full">
+                      <Spinner color="inherit" />
+                    </Center>
                   ) : (
-                    <Text mt={2}>{catFact.data}</Text>
+                    <Text mt={2} color="inherit" fontSize="inherit">
+                      {catFact.data}
+                    </Text>
                   )}
                 </Flex>
               </SimpleGrid>

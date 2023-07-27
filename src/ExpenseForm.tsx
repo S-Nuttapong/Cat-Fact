@@ -15,7 +15,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactNode } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Expense } from "./Apis";
+import { Expense, ExpenseCategory } from "./Apis";
+
+const categories = Object.values(ExpenseCategory);
 
 const expenseSchema = z.object({
   item: z
@@ -78,22 +80,41 @@ export const ExpenseForm = ({ onSubmit }: IExpenseForm) => {
     >
       <Stack w="100%" spacing={5}>
         <FormField label="Item" error={errors.item}>
-          <Input {...register("item")} type="text" />
+          <Input
+            {...register("item")}
+            type="text"
+            borderColor="border.form"
+            borderWidth={2}
+            placeholder="Item Name"
+          />
         </FormField>
         <FormField label="Category" error={errors.category}>
-          <Select {...register("category")} w="full">
-            <option value="Food">Food</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Accessory">Accessory</option>
+          <Select
+            {...register("category")}
+            w="full"
+            borderColor="border.form"
+            borderWidth={2}
+          >
+            {categories.map((category) => (
+              <option key={category} color="content">
+                {category}
+              </option>
+            ))}
           </Select>
         </FormField>
         <FormField label="Amount" error={errors.amount}>
-          <Input {...register("amount")} type="text" />
+          <Input
+            {...register("amount")}
+            type="text"
+            borderColor="border.form"
+            borderWidth={2}
+            placeholder="Item amount"
+          />
         </FormField>
         <Flex justifyContent="end">
           <Button
+            variant="primary"
             id="expense-form"
-            colorScheme="teal"
             isLoading={isSubmitting}
             type="submit"
           >

@@ -7,9 +7,11 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useMutation, useQueryClient } from "react-query";
+import { isEmpty } from "remeda";
 import { Expense, expenseServices } from "./Apis";
 
 export interface IDeleteExpense {
@@ -39,7 +41,7 @@ export const DeleteExpense = (props: IDeleteExpense) => {
       <Button
         onClick={onOpen}
         variant="outline"
-        isDisabled={selectedExpenseIds.length === 0}
+        isDisabled={isEmpty(selectedExpenseIds)}
       >
         Delete Expense
       </Button>
@@ -47,21 +49,21 @@ export const DeleteExpense = (props: IDeleteExpense) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Delete Expenses</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader>You are deleting the expenses detail</ModalHeader>
+          <ModalCloseButton size="sm" border="transparent" />
           <ModalBody>
-            Do you really want to delete the selected expenses?
+            <Text> Do you really want to delete the selected expenses?</Text>
           </ModalBody>
           <ModalFooter>
             <Button
-              colorScheme="blue"
+              variant="primary"
               mr={3}
               onClick={async () => await deleteExpense.mutate()}
             >
               Confirm
             </Button>
             <Button
-              variant="ghost"
+              variant="outline"
               onClick={onClose}
               isDisabled={deleteExpense.isLoading}
             >
