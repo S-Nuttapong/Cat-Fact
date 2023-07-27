@@ -36,7 +36,11 @@ export const DeleteExpense = (props: IDeleteExpense) => {
 
   return (
     <>
-      <Button onClick={onOpen} isDisabled={selectedExpenseIds.length === 0}>
+      <Button
+        onClick={onOpen}
+        variant="outline"
+        isDisabled={selectedExpenseIds.length === 0}
+      >
         Delete Expense
       </Button>
 

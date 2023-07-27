@@ -30,8 +30,10 @@ export const AddExpense = () => {
   });
 
   return (
-    <div>
-      <Button onClick={onOpen}>Add Expense</Button>
+    <>
+      <Button onClick={onOpen} variant="primary">
+        Add Expense
+      </Button>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose} size="4xl">
           <ModalOverlay />
@@ -66,6 +68,6 @@ export const AddExpense = () => {
           </ModalContent>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
