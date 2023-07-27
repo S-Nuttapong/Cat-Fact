@@ -13,19 +13,23 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { expenseServices, fetchCatFact } from "../../shared/Apis";
 import { ExpenseForm } from "./ExpenseForm";
 
 export const AddExpense = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const queryClient = useQueryClient();
+  const catFact = useQuery({
+    queryFn: fetchCatFact,
+    enabled: isOpen,
+  });
 
-  const catFact = useQuery("catFact", fetchCatFact, { enabled: isOpen });
-
-  const addExpenseMutation = useMutation(expenseServices.addExpense, {
+  const addExpenseMutation = useMutation({
+    mutationFn: expenseServices.addExpense,
+    mutationKey: ["addExpense"],
     onSuccess: () => {
-      queryClient.invalidateQueries("expenses");
+      queryClient.invalidateQueries(["expenses"]);
       onClose();
     },
   });

@@ -1,6 +1,7 @@
 import { Box, Center, Flex, HStack, Stack } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { useQuery } from "react-query";
+
+import { useQuery } from "@tanstack/react-query";
 import { DeleteExpense } from "./modules/DeleteExpense";
 import { AddExpense } from "./modules/add-expenses";
 import {
@@ -34,10 +35,10 @@ const AppLayout = ({ children }: IAppLayout) => {
 };
 
 const App = () => {
-  const { data, isLoading, isError } = useQuery(
-    "expenses",
-    expenseServices.getExpenses
-  );
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["expenses"],
+    queryFn: expenseServices.getExpenses,
+  });
 
   const expenses = data ?? [];
 

@@ -10,7 +10,8 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useMutation, useQueryClient } from "react-query";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "remeda";
 import { Expense, expenseServices } from "../shared/Apis";
 
@@ -25,16 +26,18 @@ export const DeleteExpense = (props: IDeleteExpense) => {
 
   const queryClient = useQueryClient();
 
-  const deleteExpense = useMutation(
-    async () => expenseServices.deleteExpense(selectedExpenseIds),
-    {
-      onSuccess: (expenses) => {
-        queryClient.invalidateQueries("expenses");
-        onClose();
-        onSuccess?.(expenses);
-      },
-    }
-  );
+  const deleteSelectedExpenseIds = async () =>
+    await expenseServices.deleteExpense(selectedExpenseIds);
+
+  const deleteExpense = useMutation({
+    mutationFn: deleteSelectedExpenseIds,
+    mutationKey: ["deleteExpense"],
+    onSuccess: (expenses) => {
+      queryClient.invalidateQueries(["expenses"]);
+      onClose();
+      onSuccess?.(expenses);
+    },
+  });
 
   return (
     <>
