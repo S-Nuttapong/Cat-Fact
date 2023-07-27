@@ -80,7 +80,7 @@ export const theme = extendTheme(
       },
       border: {
         form: neutral[100],
-        primary: neutral[50],
+        primary: neutral[200],
       },
       content: {
         primary: primary[600],
