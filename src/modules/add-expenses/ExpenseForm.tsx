@@ -31,7 +31,7 @@ const expenseSchema = z.object({
     .refine((value) => !isNaN(Number(value)), {
       message: "Amount must be a valid number",
     })
-    .refine((value) => Number(value) > 0, {
+    .refine((value) => Number(value) >= 0, {
       message: "Amount must be a positive number",
     }),
 });

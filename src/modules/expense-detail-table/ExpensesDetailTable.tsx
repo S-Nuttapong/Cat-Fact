@@ -84,7 +84,7 @@ export const ExpenseDetailTable = (props: IExpenseDetailTable) => {
             </Td>
             <Td>{expense.item}</Td>
             <Td>{expense.category}</Td>
-            <Td>{expense.amount.toFixed(2)}$</Td>
+            <Td>{Math.round(expense.amount)}$</Td>
           </Tr>
         ))}
       </Tbody>
