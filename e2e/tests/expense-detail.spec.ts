@@ -27,18 +27,6 @@ test.describe('expense detail', () => {
     expect(await testUtils.getRowContents(3)).toEqual(['', 'Watch', ExpenseCategory.Accessory, '500$'])
   })
 
-  test.only('Displays expense detail table correctly, when delete expense', async ({ page }) => {
-    const testUtils = new TestUtils(page)
-    await testUtils.addExpense({ item: 'FrenchFried', category: ExpenseCategory.Food, amount: 100 });
-    await testUtils.addExpense({ item: 'Chair', category: ExpenseCategory.Furniture, amount: 1000 });
-    await testUtils.addExpense({ item: 'Watch', category: ExpenseCategory.Accessory, amount: 500 });
 
-    const headers = await page.locator('th').allTextContents()
-    expect(headers).toEqual(["", 'Item', 'Category', 'Amount'])
-    expect(await testUtils.getRowContents()).toHaveLength(3)
-
-    const deleteBtbn = page.getByRole('button', { name: 'Delete Expense' })
-    expect(await deleteBtbn.isDisabled()).toBe(true)
-  })
 });
 

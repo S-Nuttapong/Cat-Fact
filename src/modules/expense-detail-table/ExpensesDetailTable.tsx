@@ -80,6 +80,7 @@ export const ExpenseDetailTable = (props: IExpenseDetailTable) => {
               <Checkbox
                 isChecked={row.isSelected(expense.id)}
                 onChange={row.select(expense.id)}
+                aria-label={`Select ${expense.item}`}
               />
             </Td>
             <Td>{expense.item}</Td>
