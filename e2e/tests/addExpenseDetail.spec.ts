@@ -2,18 +2,17 @@ import { expect, test } from '@playwright/test';
 import { ExpenseCategory } from '../../src/shared/Apis';
 import { TestUtils } from '../TestUtils';
 
-
-test.describe('expense detail', () => {
+test.describe('Add expense detail', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
   });
 
-  test('Does not display expense detail table, when there is no expense', async ({ page }) => {
+  test('Does not display expense detail table, when there is no expense added', async ({ page }) => {
     expect(page.getByText('No expense details')).toBeTruthy()
     expect(await page.locator('table').isVisible()).toBe(false)
   })
 
-  test('Displays expense detail table correctly, when add expense', async ({ page }) => {
+  test('Add expense detail correctly', async ({ page }) => {
     const testUtils = new TestUtils(page)
     await testUtils.addExpense({ item: 'FrenchFried', category: ExpenseCategory.Food, amount: 100 });
     await testUtils.addExpense({ item: 'Chair', category: ExpenseCategory.Furniture, amount: 1000 });
@@ -26,7 +25,5 @@ test.describe('expense detail', () => {
     expect(await testUtils.getRowContents(2)).toEqual(['', 'Chair', ExpenseCategory.Furniture, '1000$'])
     expect(await testUtils.getRowContents(3)).toEqual(['', 'Watch', ExpenseCategory.Accessory, '500$'])
   })
-
-
 });
 

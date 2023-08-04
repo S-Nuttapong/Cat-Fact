@@ -3,7 +3,7 @@ import { ExpenseCategory } from '../../src/shared/Apis';
 import { TestUtils } from '../TestUtils';
 
 
-test.describe('delete expense detail', () => {
+test.describe('Delete expense detail', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/')
         const testUtils = new TestUtils(page)
