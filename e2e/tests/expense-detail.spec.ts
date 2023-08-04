@@ -3,7 +3,7 @@ import { ExpenseCategory } from '../../src/shared/Apis';
 import testUtils from '../utils';
 
 
-test.describe('Login by entering the PIN', () => {
+test.describe('expense detail', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
   });
