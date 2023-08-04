@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { ExpenseCategory } from '../../src/shared/Apis';
-import testUtils from '../utils';
+import { TestUtils } from '../TestUtils';
 
 
 test.describe('expense detail', () => {
@@ -8,27 +8,37 @@ test.describe('expense detail', () => {
     await page.goto('/')
   });
 
-  test('Does not display expense detail table, when there is no expense', ({ page }) => {
+  test('Does not display expense detail table, when there is no expense', async ({ page }) => {
     expect(page.getByText('No expense details')).toBeTruthy()
-    expect(page.locator('table')).toBeFalsy()
+    expect(await page.locator('table').isVisible()).toBe(false)
   })
 
   test('Displays expense detail table correctly, when add expense', async ({ page }) => {
-    await testUtils.addExpense(page, { item: 'FrenchFried', category: ExpenseCategory.Food, amount: 100 });
-    await testUtils.addExpense(page, { item: 'Chair', category: ExpenseCategory.Furniture, amount: 1000 });
-    await testUtils.addExpense(page, { item: 'Watch', category: ExpenseCategory.Accessory, amount: 500 });
+    const testUtils = new TestUtils(page)
+    await testUtils.addExpense({ item: 'FrenchFried', category: ExpenseCategory.Food, amount: 100 });
+    await testUtils.addExpense({ item: 'Chair', category: ExpenseCategory.Furniture, amount: 1000 });
+    await testUtils.addExpense({ item: 'Watch', category: ExpenseCategory.Accessory, amount: 500 });
 
     const headers = await page.locator('th').allTextContents()
     expect(headers).toEqual(["", 'Item', 'Category', 'Amount'])
+    expect(await testUtils.getRowContents()).toHaveLength(3)
+    expect(await testUtils.getRowContents(1)).toEqual(['', 'FrenchFried', ExpenseCategory.Food, '100$'])
+    expect(await testUtils.getRowContents(2)).toEqual(['', 'Chair', ExpenseCategory.Furniture, '1000$'])
+    expect(await testUtils.getRowContents(3)).toEqual(['', 'Watch', ExpenseCategory.Accessory, '500$'])
+  })
 
-    const getRowTextContents = async (rowNumber: number) => {
-      const row = page.locator(`tr`).nth(rowNumber)
-      return await row.locator('td').allTextContents()
-    }
+  test.only('Displays expense detail table correctly, when delete expense', async ({ page }) => {
+    const testUtils = new TestUtils(page)
+    await testUtils.addExpense({ item: 'FrenchFried', category: ExpenseCategory.Food, amount: 100 });
+    await testUtils.addExpense({ item: 'Chair', category: ExpenseCategory.Furniture, amount: 1000 });
+    await testUtils.addExpense({ item: 'Watch', category: ExpenseCategory.Accessory, amount: 500 });
 
-    expect(await getRowTextContents(1)).toEqual(['', 'FrenchFried', ExpenseCategory.Food, '100$'])
-    expect(await getRowTextContents(1)).toEqual(['', 'Chair', ExpenseCategory.Furniture, '1000$'])
-    expect(await getRowTextContents(1)).toEqual(['', 'Watch', ExpenseCategory.Accessory, '500$'])
+    const headers = await page.locator('th').allTextContents()
+    expect(headers).toEqual(["", 'Item', 'Category', 'Amount'])
+    expect(await testUtils.getRowContents()).toHaveLength(3)
+
+    const deleteBtbn = page.getByRole('button', { name: 'Delete Expense' })
+    expect(await deleteBtbn.isDisabled()).toBe(true)
   })
 });
 
