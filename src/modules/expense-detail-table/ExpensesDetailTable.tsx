@@ -4,7 +4,6 @@ import {
   Th as BaseTh,
   Tr as BaseTr,
   BoxProps,
-  CheckboxProps,
   Spinner,
   Table,
   Tbody,
@@ -13,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { isEmpty } from "remeda";
 import { Expense } from "../../shared/Apis";
-import { withDefaultStyles } from "../../shared/withDefaultStyles";
 import type { useExpenseRowSelector } from "./useExpenseRowSelector";
+import { withDefaultProps } from "./withDefaultProps";
 
 interface IExpenseDetailTable {
   isLoading?: boolean;
@@ -23,29 +22,27 @@ interface IExpenseDetailTable {
   expenses: Expense[];
 }
 
-type Attributes =
-  | "borderWidth"
-  | "borderColor"
-  | "borderStyle"
-  | "textTransform";
+type DefaultStyles = Pick<
+  BoxProps,
+  "borderWidth" | "borderColor" | "borderStyle" | "textTransform"
+>;
 
-type DefaultStyles = Pick<BoxProps, Attributes>;
-
-const tableStyles: DefaultStyles = {
+const defaultStyles: DefaultStyles = {
   borderWidth: 2,
   borderColor: "border.primary",
   borderStyle: "solid",
   textTransform: "none",
 };
-const Tr = withDefaultStyles(BaseTr, tableStyles);
-const Th = withDefaultStyles(BaseTh, tableStyles);
-const Td = withDefaultStyles(BaseTd, tableStyles);
-const Checkbox = withDefaultStyles(BaseCheckbox, {
-  ...tableStyles,
+
+const Tr = withDefaultProps(BaseTr, defaultStyles);
+const Th = withDefaultProps(BaseTh, defaultStyles);
+const Td = withDefaultProps(BaseTd, defaultStyles);
+const Checkbox = withDefaultProps(BaseCheckbox, {
+  ...defaultStyles,
   borderWidth: 1,
   borderStyle: "hidden",
   colorScheme: "teal",
-} as Pick<CheckboxProps, Attributes | "colorScheme">);
+});
 
 export const ExpenseDetailTable = (props: IExpenseDetailTable) => {
   const { isLoading, isError, rowSelector: row, expenses } = props;
@@ -58,12 +55,15 @@ export const ExpenseDetailTable = (props: IExpenseDetailTable) => {
     return <Text color="content.guide">No expense details</Text>;
 
   return (
-    <Table borderColor="border.primary" borderWidth={1} borderStyle="solid">
+    <Table {...defaultStyles} borderWidth={1}>
       <Thead>
         <Tr>
-          {/*Hack(San): force column to fit the width of the checkbox, other semantic way like "fit-content", "auto" won't do because of it's nature being dynamic value*/}
           <Th width={0}>
-            <Checkbox isChecked={row.isAllSelected} onChange={row.selectAll} />
+            <Checkbox
+              isChecked={row.isAllSelected}
+              onChange={row.selectAll}
+              aria-label="Select all expenses"
+            />
           </Th>
           <Th>Item</Th>
           <Th>Category</Th>

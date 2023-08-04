@@ -1,7 +1,7 @@
 import { ComponentType, PropsWithChildren } from "react";
 
-export const withDefaultStyles =
-  <TStyles, P extends TStyles>(Component: ComponentType<P>, styles: TStyles) =>
+export const withDefaultProps =
+  <P extends object>(Component: ComponentType<P>, styles: Partial<P>) =>
   ({ children, ...props }: PropsWithChildren<P>) => {
     return (
       <Component {...styles} {...(props as P)}>
