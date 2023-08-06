@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { ExpenseCategory } from '../../src/shared/Apis';
+import { ExpenseCategory } from '../../src/shared/apis';
 import { TestUtils } from '../TestUtils';
 
 
