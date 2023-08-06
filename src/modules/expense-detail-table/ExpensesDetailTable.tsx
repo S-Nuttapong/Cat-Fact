@@ -11,7 +11,7 @@ import {
   Thead,
 } from "@chakra-ui/react";
 import { isEmpty } from "remeda";
-import { Expense } from "../../shared/Apis";
+import { Expense } from "../../shared/apis";
 import type { useExpenseRowSelector } from "./useExpenseRowSelector";
 import { withDefaultProps } from "./withDefaultProps";
 

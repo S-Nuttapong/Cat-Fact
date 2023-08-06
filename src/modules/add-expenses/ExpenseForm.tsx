@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactNode } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Expense, ExpenseCategory } from "../../shared/Apis";
+import { Expense, ExpenseCategory } from "../../shared/apis";
 
 const categories = Object.values(ExpenseCategory);
 

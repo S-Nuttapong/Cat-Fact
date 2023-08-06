@@ -13,7 +13,7 @@ import {
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "remeda";
-import { Expense, expenseServices } from "../shared/Apis";
+import { Expense, useApi } from "../shared/apis";
 
 export interface IDeleteExpense {
   selectedExpenseIds: Expense["id"][];
@@ -25,9 +25,9 @@ export const DeleteExpense = (props: IDeleteExpense) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const queryClient = useQueryClient();
-
+  const api = useApi();
   const deleteSelectedExpenseIds = async () =>
-    await expenseServices.deleteExpense(selectedExpenseIds);
+    await api.deleteExpense(selectedExpenseIds);
 
   const deleteExpense = useMutation({
     mutationFn: deleteSelectedExpenseIds,

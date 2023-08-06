@@ -14,19 +14,19 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { expenseServices, fetchCatFact } from "../../shared/Apis";
+import { useApi } from "../../shared/apis";
 import { ExpenseForm } from "./ExpenseForm";
 
 export const AddExpense = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const queryClient = useQueryClient();
+  const api = useApi();
   const catFact = useQuery({
-    queryFn: fetchCatFact,
+    queryFn: api.fetchCatFact,
     enabled: isOpen,
   });
-
-  const addExpenseMutation = useMutation({
-    mutationFn: expenseServices.addExpense,
+  const addExpense = useMutation({
+    mutationFn: api.addExpense,
     mutationKey: ["addExpense"],
     onSuccess: () => {
       queryClient.invalidateQueries(["expenses"]);
@@ -52,9 +52,7 @@ export const AddExpense = () => {
                 minChildWidth={300}
               >
                 <ExpenseForm
-                  onSubmit={async (data) =>
-                    await addExpenseMutation.mutate(data)
-                  }
+                  onSubmit={async (data) => await addExpense.mutate(data)}
                 />
                 <Flex
                   flexDir="column"

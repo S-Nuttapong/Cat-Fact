@@ -8,7 +8,7 @@ import {
   ExpenseDetailTable,
   useExpenseRowSelector,
 } from "./modules/expense-detail-table";
-import { expenseServices } from "./shared/Apis";
+import { useApi } from "./shared/apis";
 
 interface IAppLayout {
   children: ReactNode;
@@ -35,9 +35,10 @@ const AppLayout = ({ children }: IAppLayout) => {
 };
 
 const App = () => {
+  const api = useApi();
   const { data, isLoading, isError } = useQuery({
     queryKey: ["expenses"],
-    queryFn: expenseServices.getExpenses,
+    queryFn: api.getExpenses,
   });
 
   const expenses = data ?? [];
