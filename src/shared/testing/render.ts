@@ -4,8 +4,6 @@ import type { ReactElement } from 'react';
 
 type RenderOptions = Parameters<typeof renderComponent>[1];
 
-export * from '@testing-library/react';
-
 export const render = (ui: ReactElement, options?: RenderOptions) => {
     return {
         ...renderComponent(ui, options),

@@ -1,5 +1,5 @@
 import { describe, it, vi } from "vitest";
-import { IExpenseDetailServices } from "../../shared/apis";
+import { ExpenseCategory, IExpenseDetailServices } from "../../shared/apis";
 import { MockApiProvider, render } from "../../shared/testing";
 import { AddExpense } from "./AddExpenses";
 
@@ -76,7 +76,26 @@ describe("AddExpense", () => {
     expect(stubAddExpense).not.toBeCalled();
   });
 
-  it.todo(
-    "called addExpense mutation correctly, when users submit valid expense detail"
-  );
+  it("calls addExpense mutation correctly with valid expense detail", async () => {
+    const { user, ...screen } = render(
+      <MockApiProvider api={{ addExpense: stubAddExpense }}>
+        <AddExpense />
+      </MockApiProvider>
+    );
+
+    await user.click(screen.getByRole("button", { name: /Add Expense/i }));
+    await user.type(screen.getByPlaceholderText("Item name"), "Bed");
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Category/i }),
+      ExpenseCategory.Furniture
+    );
+    await user.type(screen.getByPlaceholderText("Item amount"), "100");
+    await user.click(screen.getByRole("button", { name: /Submit/i }));
+
+    expect(stubAddExpense).toBeCalledWith({
+      item: "Bed",
+      category: ExpenseCategory.Furniture,
+      amount: 100,
+    });
+  });
 });
