@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "vitest": "vitest",
+    "vitest": "vitest --root src/",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -14,32 +14,37 @@
     "theme:watch": "chakra-cli tokens ./src/theme.ts --watch"
   },
   "dependencies": {
+    "@chakra-ui/icons": "2.0.9",
     "@chakra-ui/react": "^2.8.0",
     "@hookform/resolvers": "^3.1.1",
+    "@tanstack/react-query": "^4.29.19",
     "axios": "^1.4.0",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
-    "@tanstack/react-query": "^4.29.19",
-    "@chakra-ui/icons": "2.0.9",
     "remeda": "^1.24.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.35.1",
-    "@types/node": "^20.3.2",
     "@chakra-ui/cli": "^2.4.1",
     "@chakra-ui/styled-system": "^2.9.1",
+    "@playwright/test": "^1.35.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/node": "^20.3.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "jsdom": "^22.1.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vitest": "^0.34.1"
   }
 }
