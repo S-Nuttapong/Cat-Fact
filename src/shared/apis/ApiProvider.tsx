@@ -5,7 +5,7 @@ export const apiContext = createContext<Api>({} as Api);
 
 apiContext.displayName = "ApiProvider";
 
-interface IApiProvider {
+export interface IApiProvider {
   api: Api;
   children: ReactNode;
 }

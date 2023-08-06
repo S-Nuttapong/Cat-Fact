@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
-import { Expense } from "../src/shared/Apis";
-
+import { Expense } from '../src/shared/apis';
 export class TestUtils {
     private page: Page;
 

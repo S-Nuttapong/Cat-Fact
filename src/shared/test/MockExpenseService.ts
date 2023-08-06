@@ -1,14 +1,14 @@
 import { nanoid } from 'nanoid';
-import { Expense, IExpenseDetailServices } from '../apis/interface';
+import { Expense, IExpenseDetailServices } from '../apis';
 
 export class MockExpenseService implements IExpenseDetailServices {
     private expenses: Expense[] = [];
 
-    async getExpenses(): Promise<Expense[]> {
+    getExpenses = async () => {
         return this.expenses;
     }
 
-    async addExpense(expense: Omit<Expense, "id">): Promise<Expense[]> {
+    addExpense = async (expense: Omit<Expense, "id">) => {
         const newExpense = {
             ...expense,
             id: nanoid(),
@@ -17,7 +17,7 @@ export class MockExpenseService implements IExpenseDetailServices {
         return this.expenses;
     }
 
-    async deleteExpense(expenseIds: string[]): Promise<Expense[]> {
+    deleteExpense = async (expenseIds: string[]) => {
         this.expenses = this.expenses.filter((expense: Expense) => !expenseIds.includes(expense.id));
         return this.expenses;
     }
