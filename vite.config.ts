@@ -7,6 +7,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './shared/test/setupTest.ts'
+    setupFiles: './shared/testing/setupTest.ts'
   },
 } as UserConfigExport)

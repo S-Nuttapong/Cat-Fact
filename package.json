@@ -1,6 +1,8 @@
 {
   "name": "cat-expense",
-  "sideEffect": false,
+  "sideEffect": [
+    "src/shared/testing/setupTest.ts"
+  ],
   "private": true,
   "version": "0.0.0",
   "type": "module",
