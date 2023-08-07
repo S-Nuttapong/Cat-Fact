@@ -30,6 +30,7 @@ Plugins list for better **DX**
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) - Autofix on save, testing from linters
 - [Playwright](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) -  UI for running the playwright testing
+- [Vitest](https://vitest.dev/) -  UI for running the Vitest testing
 
 ## Technology stack
 
