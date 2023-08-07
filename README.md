@@ -47,7 +47,6 @@ Plugins list for better **DX**
 
 ## TODO
 - [ ] Add code documentation
-- [ ] Consolidate the business requirements, particularly the banknote dispensation. The lack of a concrete example opens up too many possibilities regarding how the ATM decides which banknotes to give users.
 - [ ] Consolidate the business features, entities/domain objects, and update the architecture accordingly.
 - [ ] Set up the protected branch and add contribution guidelines.
 - [ ] Update E2E to test against the deploy preview
