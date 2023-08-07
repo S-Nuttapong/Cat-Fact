@@ -1,3 +1,5 @@
+[Try it on preview](cat-fact-phi.vercel.app) 
+
 ## Dev-guide
 
 ### Launch dev-stand
@@ -42,3 +44,12 @@ Plugins list for better **DX**
 3.  **Tests**: `eslint`, `prettier`, `vitest`, `playwright`
 
 - **CI/CD**: `github-actions`
+
+## TODO
+- [ ] Add code documentation
+- [ ] Consolidate the business requirements, particularly the banknote dispensation. The lack of a concrete example opens up too many possibilities regarding how the ATM decides which banknotes to give users.
+- [ ] Consolidate the business features, entities/domain objects, and update the architecture accordingly.
+- [ ] Set up the protected branch and add contribution guidelines.
+- [ ] Update E2E to test against the deploy preview
+- [ ] Update integration & unit tests' report on CI 
+- [ ] Add logging service?
