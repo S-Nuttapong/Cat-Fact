@@ -1,4 +1,4 @@
-[Try it on preview](cat-fact-phi.vercel.app) 
+[Try it on preview](https://cat-fact-phi.vercel.app/) 
 
 ## Dev-guide
 
