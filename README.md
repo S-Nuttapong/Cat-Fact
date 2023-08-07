@@ -48,6 +48,7 @@ Plugins list for better **DX**
 ## TODO
 - [ ] Add code documentation
 - [ ] Consolidate the business features, entities/domain objects, and update the architecture accordingly.
+- [ ] Config path alias for a more pleasant import path looking?
 - [ ] Set up the protected branch and add contribution guidelines.
 - [ ] Update E2E to test against the deploy preview
 - [ ] Update integration & unit tests' report on CI 
